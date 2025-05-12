@@ -116,6 +116,10 @@ dependencies {
     implementation("io.noties.markwon:html:4.6.2")
     implementation("io.noties.markwon:image:4.6.2")
     implementation("com.google.android.gms:play-services-auth:20.0.0")
+    implementation("androidx.constraintlayout:constraintlayout:2.1.4")
+    implementation ("com.tbuonomo:dotsindicator:4.3")
+    implementation ("com.google.code.gson:gson:2.10.1")
+    implementation("com.itextpdf:itextg:5.5.10")
 
 }
 
