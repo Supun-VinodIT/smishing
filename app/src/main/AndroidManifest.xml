@@ -148,6 +148,10 @@
         <activity
             android:name=".CommunityPostActivity"
             android:exported="false" />
+
+        <!-- Community Report page -->
+        <activity android:name=".CommunityReportActivity"
+            android:label="Community – Report"/>
         <activity
             android:name=".riskmeter.RiskScannerTCActivity"
             android:exported="true" />
