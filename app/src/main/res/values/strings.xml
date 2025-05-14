@@ -90,7 +90,6 @@
 </string>
 
 
-
     <!-- Password Change Window Strings -->
     <string name="change_password_page">Change Password</string>
     <string name="current_password">Current Password</string>
@@ -218,7 +217,6 @@
     <string name="title_activity_signup">SignupActivity</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-
 
 
     <!-- Added strings -->
@@ -476,5 +474,7 @@
     <string name="scanning">Scanning...</string>
     <string name="checking_if_your_sms_app_is_a_trusted_provider_like_google_or_samsung_messages">Checking if your SMS app is a trusted provider like Google or Samsung Messages.</string>
     <string name="checking_if_trusted_security_apps_like_norton_or_bitdefender_are_installed">Checking if trusted security apps like Norton or Bitdefender are installed.</string>
+    <string name="enable_clipboard_monitor">Enable Clipboard Monitor</string>
+    <string name="previous">Previous</string>
 
 </resources>

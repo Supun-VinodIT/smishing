@@ -244,6 +244,34 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 tools:ignore="UseSwitchCompatOrMaterialXml" />
 
+            <Switch
+                android:id="@+id/clipboard_monitor_switch"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:paddingVertical="8dp"
+                android:text="@string/enable_clipboard_monitor"
+                android:layout_marginStart="28dp"
+                android:layout_marginEnd="28dp"
+                app:layout_constraintTop_toBottomOf="@+id/password_security_check_switch"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                tools:ignore="UseSwitchCompatOrMaterialXml" />
+
+            <TextView
+                android:id="@+id/link_to_clipboard_history"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingVertical="8dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:text="Go to clipboard history"
+                android:layout_marginStart="28dp"
+                android:layout_marginEnd="28dp"
+                android:textColor="@android:color/holo_blue_dark"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/clipboard_monitor_switch" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/open_notification_settings_button"
@@ -255,7 +283,7 @@
                 android:layout_marginEnd="28dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/password_security_check_switch"
+                app:layout_constraintTop_toBottomOf="@+id/link_to_clipboard_history"
                 tools:layout_editor_absoluteX="28dp" />
 
 

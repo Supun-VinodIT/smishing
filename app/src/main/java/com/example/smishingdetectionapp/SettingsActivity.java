@@ -1,6 +1,7 @@
 package com.example.smishingdetectionapp;
 
 import android.app.Dialog;
+import android.content.Context;
 import android.view.View;
 import android.content.Intent;
 import android.os.Bundle;
@@ -20,6 +21,8 @@ import androidx.biometric.BiometricPrompt;
 import androidx.core.content.ContextCompat;
 
 import com.example.smishingdetectionapp.chat.ChatAssistantActivity;
+import com.example.smishingdetectionapp.notifications.clipboard.ClipboardHistory;
+import com.example.smishingdetectionapp.notifications.clipboard.ClipboardService;
 import com.example.smishingdetectionapp.ui.account.AccountActivity;
 import com.example.smishingdetectionapp.ui.locale.LocaleHelper;
 import com.example.smishingdetectionapp.ui.login.LoginActivity;
@@ -53,6 +56,8 @@ public class SettingsActivity extends AppCompatActivity {
     private boolean isColdStart = true;
     private Switch darkModeSwitch;
 
+    private Switch clipboardMonitorSwitch;
+    private SharedPreferences clipboardPref;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -265,7 +270,27 @@ public class SettingsActivity extends AppCompatActivity {
             prefs.edit().remove("scroll_pos").apply();
         }
 
+        clipboardMonitorSwitch = findViewById(R.id.clipboard_monitor_switch);
+        clipboardPref = getSharedPreferences("clipboard_settings", Context.MODE_PRIVATE);
 
+        boolean clipboardMonitoring = prefs.getBoolean("clipboard_monitoring", false);
+        clipboardMonitorSwitch.setChecked(clipboardMonitoring);
+        if (clipboardMonitoring) startClipBoardMonitor();
+
+        clipboardMonitorSwitch.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            prefs.edit().putBoolean("clipboard_monitoring", isChecked).apply();
+            if (isChecked) {
+                startClipBoardMonitor();
+            } else {
+                stopService(new Intent(this, ClipboardService.class));
+            }
+        });
+
+        TextView goToClipBoardHistory = findViewById(R.id.link_to_clipboard_history);
+        goToClipBoardHistory.setOnClickListener(v -> {
+            Intent clipboardIntent = new Intent(SettingsActivity.this, ClipboardHistory.class);
+            startActivity(clipboardIntent);
+        });
     }
 
     // Trigger biometric authentication with timeout
@@ -456,6 +481,11 @@ public class SettingsActivity extends AppCompatActivity {
         scrollView.post(() ->
                 scrollView.scrollTo(0, savedPosition)
         );
+    }
+
+    private void startClipBoardMonitor() {
+        Intent serviceIntent = new Intent(this, ClipboardService.class);
+        startService(serviceIntent);
     }
 
     @Override
