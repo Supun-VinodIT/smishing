@@ -10,9 +10,14 @@ import com.example.smishingdetectionapp.R;
 import com.example.smishingdetectionapp.SettingsActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.tabs.TabLayout;
+
 import android.content.Intent;
 import android.util.Log;
 import android.widget.ImageButton;
+import android.view.View;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+import android.graphics.Typeface;
 
 public class CommunityHomeActivity extends AppCompatActivity {
     @Override
@@ -66,17 +71,12 @@ public class CommunityHomeActivity extends AppCompatActivity {
 
         // Back Button
         ImageButton community_back = findViewById(R.id.community_back);
-        // Check if the back button is initialized properly
         if (community_back != null) {
-            // Set an onClick listener to handle the back button's behavior
             community_back.setOnClickListener(v -> {
-                // Start SettingsActivity when back button is pressed
                 startActivity(new Intent(this, SettingsActivity.class));
-                // Close the current activity
                 finish();
             });
         } else {
-            // Log an error if the back button is null
             Log.e("NotificationActivity", "Back button is null");
         }
 
@@ -111,5 +111,48 @@ public class CommunityHomeActivity extends AppCompatActivity {
             }
             return false;
         });
+
+        loadTrendingPost();
+    }
+
+    private void loadTrendingPost() {
+        CommunityDatabaseAccess dbAccess = new CommunityDatabaseAccess(this);
+        dbAccess.open();
+        CommunityPost topPost = dbAccess.getTopLikedPost();
+        dbAccess.close();
+
+        LinearLayout container = findViewById(R.id.topPostContainer);
+
+        if (topPost != null && container != null) {
+            container.removeAllViews();
+            container.setVisibility(View.VISIBLE);
+
+            TextView title = new TextView(this);
+            title.setText(topPost.getPosttitle());
+            title.setTextSize(20);
+            title.setTypeface(null, Typeface.BOLD);
+            title.setTextColor(getResources().getColor(R.color.black));
+
+            TextView description = new TextView(this);
+            description.setText(topPost.getPostdescription());
+            description.setTextSize(14);
+            description.setTextColor(getResources().getColor(R.color.black));
+
+            container.addView(title);
+            container.addView(description);
+
+            container.setOnClickListener(v -> {
+                Intent intent = new Intent(this, CommunityOpenPost.class);
+                intent.putExtra("postId", topPost.getId());
+                intent.putExtra("username", topPost.getUsername());
+                intent.putExtra("date", topPost.getDate());
+                intent.putExtra("posttitle", topPost.getPosttitle());
+                intent.putExtra("postdescription", topPost.getPostdescription());
+                intent.putExtra("likes", topPost.getLikes());
+                intent.putExtra("comments", topPost.getComments());
+                intent.putExtra("position", 0);
+                startActivity(intent);
+            });
+        }
     }
 }

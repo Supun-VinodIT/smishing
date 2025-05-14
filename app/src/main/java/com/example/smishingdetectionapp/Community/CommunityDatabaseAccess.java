@@ -8,6 +8,9 @@ import android.database.sqlite.SQLiteDatabase;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.example.smishingdetectionapp.Community.CommunityDatabase;
+import com.example.smishingdetectionapp.Community.CommunityPost;
+
 public class CommunityDatabaseAccess {
     private SQLiteDatabase database;
     private CommunityDatabase dbHelper;
@@ -108,7 +111,7 @@ public class CommunityDatabaseAccess {
         return empty;
     }
 
-    // Comments section
+    // comments section
     public void insertComment(CommunityComment comment) {
         ContentValues values = new ContentValues();
         values.put(CommunityDatabase.COL_POST_ID, comment.getPostId());
@@ -147,6 +150,36 @@ public class CommunityDatabaseAccess {
     public void deleteSingleComment(int commentId) {
         database.delete(CommunityDatabase.TABLE_COMMENTS,
                 CommunityDatabase.COL_COMMENT_ID + "=?", new String[]{String.valueOf(commentId)});
+    }
+
+    public CommunityPost getTopLikedPost() {
+        CommunityPost post = null;
+
+        Cursor cursor = database.query(
+                CommunityDatabase.TABLE_POSTS,
+                null,
+                null,
+                null,
+                null,
+                null,
+                CommunityDatabase.COL_LIKES + " DESC",
+                "1"
+        );
+
+        if (cursor.moveToFirst()) {
+            int id = cursor.getInt(cursor.getColumnIndexOrThrow(CommunityDatabase.COL_ID));
+            String username = cursor.getString(cursor.getColumnIndexOrThrow(CommunityDatabase.COL_USERNAME));
+            String date = cursor.getString(cursor.getColumnIndexOrThrow(CommunityDatabase.COL_DATE));
+            String title = cursor.getString(cursor.getColumnIndexOrThrow(CommunityDatabase.COL_TITLE));
+            String description = cursor.getString(cursor.getColumnIndexOrThrow(CommunityDatabase.COL_DESCRIPTION));
+            int likes = cursor.getInt(cursor.getColumnIndexOrThrow(CommunityDatabase.COL_LIKES));
+            int comments = cursor.getInt(cursor.getColumnIndexOrThrow(CommunityDatabase.COL_COMMENTS));
+
+            post = new CommunityPost(id, username, date, title, description, likes, comments);
+        }
+
+        cursor.close();
+        return post;
     }
 
 }
