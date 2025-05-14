@@ -1,5 +1,6 @@
 package com.example.smishingdetectionapp.ui;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -11,6 +12,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import com.example.smishingdetectionapp.R;
+import com.example.smishingdetectionapp.ui.Submissionscreen;
 
 public class ContactUsActivity extends AppCompatActivity {
 
@@ -137,12 +139,27 @@ public class ContactUsActivity extends AppCompatActivity {
 
         if (isValid) {
             Toast.makeText(this, "Your message has been sent!", Toast.LENGTH_LONG).show();
-            // Optionally: send form data to backend or Firebase here
+
+            // Clear the form
+            email.setText("");
+            firstName.setText("");
+            lastName.setText("");
+            company.setText("");
+            phone.setText("");
+            message.setText("");
+            cb1.setChecked(false);
+            cb2.setChecked(false);
+            cb3.setChecked(false);
+            cb4.setChecked(false);
+
+            // 🔥 Launch the submission screen
+            Intent intent = new Intent(ContactUsActivity.this, Submissionscreen.class);
+            startActivity(intent);
         }
     }
 
-    @Override
-    public boolean onSupportNavigateUp() {
+        @Override
+        public boolean onSupportNavigateUp() {
         finish();
         return true;
     }
