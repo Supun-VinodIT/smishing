@@ -101,7 +101,7 @@ public class HelpActivity extends SharedActivity {
         MaterialCardView cardFeedback = findViewById(R.id.cardFeedback);
         if (cardFeedback != null) {
             cardFeedback.setOnClickListener(v ->
-                    Toast.makeText(HelpActivity.this, "Send Feedback", Toast.LENGTH_SHORT).show()
+                    startActivity(new Intent(HelpActivity.this, FeedbackActivity.class))
             );
         }
     }

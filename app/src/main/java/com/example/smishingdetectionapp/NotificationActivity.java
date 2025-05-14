@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
@@ -19,6 +20,7 @@ import android.widget.Switch;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationCompat;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
@@ -91,6 +93,10 @@ public class NotificationActivity extends SharedActivity {
         // Setup for button that takes you to notification settings in your device
         Button settingsButton = findViewById(R.id.open_notification_settings_button);
         settingsButton.setOnClickListener(v -> {
+            // Show test notification
+            showNotification("Test Notification", "This is a test notification triggered by the settings button.");
+
+            // Then open system notification settings
             Intent intent = new Intent();
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                 intent.setAction(Settings.ACTION_APP_NOTIFICATION_SETTINGS);
@@ -100,8 +106,8 @@ public class NotificationActivity extends SharedActivity {
                 intent.setData(Uri.fromParts("package", getPackageName(), null));
             }
             startActivity(intent);
-
         });
+
 
     }
 
@@ -121,6 +127,30 @@ public class NotificationActivity extends SharedActivity {
             Log.e("NotificationActivity","Switch button is Null");
         }
     }
+    private void showNotification(String title, String message) {
+        NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+        String channelId = "my_channel_id";
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            NotificationChannel channel = new NotificationChannel(
+                    channelId,
+                    "Default Channel",
+                    NotificationManager.IMPORTANCE_HIGH
+            );
+            channel.setDescription("Used for app alerts");
+            notificationManager.createNotificationChannel(channel);
+        }
+
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(this, channelId)
+                .setSmallIcon(R.drawable.new_logo)  // logo
+                .setContentTitle(title)
+                .setContentText(message)
+                .setPriority(NotificationCompat.PRIORITY_HIGH)
+                .setAutoCancel(true);
+
+        notificationManager.notify(1, builder.build());
+    }
+
 }
 
 

@@ -176,6 +176,12 @@ public class SettingsActivity extends AppCompatActivity {
         Button accountBtn = findViewById(R.id.accountBtn);
         accountBtn.setOnClickListener(v -> triggerBiometricAuthenticationWithTimeout());
 
+        //Notification button to switch to notification page
+        Button notificationBtn = findViewById(R.id.notificationBtn);
+        notificationBtn.setOnClickListener(v -> {
+            startActivity(new Intent(this, NotificationActivity.class));
+        });
+
         //Filtering button to switch to Smishing rules page
         ImageView filteringBtn = findViewById(R.id.imageView7);
         if (filteringBtn != null) {
@@ -189,7 +195,7 @@ public class SettingsActivity extends AppCompatActivity {
         reportBtn.setOnClickListener(v -> {
             startActivity(new Intent(this, ReportingActivity.class));
         });
-        //Notification button to switch to notification page
+
 
         // Help button to switch to Help page
         Button helpBtn = findViewById(R.id.helpBtn);
