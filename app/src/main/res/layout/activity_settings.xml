@@ -376,6 +376,35 @@
                 app:layout_constraintTop_toBottomOf="@+id/dark_mode_switch"
                 tools:ignore="UseSwitchCompatOrMaterialXml" />
 
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/language_ui"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="28dp"
+                android:layout_marginEnd="28dp"
+                android:background="?attr/selectableItemBackground"
+                android:clickable="true"
+                android:drawablePadding="8dp"
+                android:focusable="true"
+                android:gravity="start|center_vertical"
+                android:paddingVertical="8dp"
+                android:padding="0dp"
+                android:text="@string/select_language"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/always_underline_links" />
+
+            <ImageView
+                android:id="@+id/image_language_ui"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:layout_marginEnd="15dp"
+                android:contentDescription="@string/outline_arrow_outward_24_alt"
+                app:layout_constraintEnd_toEndOf="@+id/language_ui"
+                app:layout_constraintTop_toTopOf="@+id/language_ui"
+                app:srcCompat="@drawable/ic_language_globe" />
+
             <Switch
                 android:id="@+id/bold_text"
                 android:layout_width="0dp"
@@ -387,7 +416,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/always_underline_links"
+                app:layout_constraintTop_toBottomOf="@+id/language_ui"
                 tools:ignore="UseSwitchCompatOrMaterialXml" />
 
             <LinearLayout
@@ -407,7 +436,7 @@
                     android:id="@+id/textSizeTitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Adjust Text Size"
+                    android:text="@string/adjust_text_size"
                     android:textStyle="bold"
                     android:textColor="@color/navy_blue"
                     android:textSize="18sp"

@@ -36,7 +36,9 @@
         android:theme="@style/Theme.SmishingDetectionApp"
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
-
+        <activity
+            android:name=".ui.locale.LanguageActivity"
+            android:exported="false" />
         <!-- Splash Activity (first screen that will show) -->
         <activity
             android:name=".SplashScreen"

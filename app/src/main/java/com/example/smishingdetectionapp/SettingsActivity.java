@@ -21,6 +21,7 @@ import androidx.core.content.ContextCompat;
 
 import com.example.smishingdetectionapp.chat.ChatAssistantActivity;
 import com.example.smishingdetectionapp.ui.account.AccountActivity;
+import com.example.smishingdetectionapp.ui.locale.LocaleHelper;
 import com.example.smishingdetectionapp.ui.login.LoginActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -40,6 +41,7 @@ public class SettingsActivity extends AppCompatActivity {
     private static final int TIMEOUT_MILLIS = 10000; // 30 seconds timeout
     private boolean isAuthenticated = false;
     private BiometricPrompt biometricPrompt; // To cancel authentication
+    private LocaleHelper localeHelper;// Declare LocaleHelper
     private Button buttonIncreaseTextSize, buttonDecreaseTextSize, dialogCancel, dialogSignout;
     private TextView textScaleLabel;
     private float textScale; // between 0.8f and 1.5f, for example
@@ -190,6 +192,15 @@ public class SettingsActivity extends AppCompatActivity {
             startActivity(new Intent(this, ReportingActivity.class));
         });
         //Notification button to switch to notification page
+
+        // Initialize local helper
+        localeHelper = new LocaleHelper(this);
+
+        //local activity link
+        Button localLink = findViewById(R.id.language_ui);
+        localLink.setOnClickListener(v->{
+            localeHelper.showLanguageActivity();
+        });
 
         // Help button to switch to Help page
         Button helpBtn = findViewById(R.id.helpBtn);
