@@ -33,6 +33,8 @@ import androidx.preference.PreferenceManager;
 import android.content.SharedPreferences;
 import android.widget.Switch;
 import com.example.smishingdetectionapp.ui.ContactUsActivity;
+import com.google.android.material.button.MaterialButton;
+
 
 
 
@@ -213,11 +215,12 @@ public class SettingsActivity extends AppCompatActivity {
             startActivity(intent);
         });
 
-        Button contactUsBtn = findViewById(R.id.contactUsBtn);
-        contactUsBtn.setOnClickListener(v -> {
+        MaterialButton contactUsButton = findViewById(R.id.contactUsBtn);
+        contactUsButton.setOnClickListener(view -> {
             Intent intent = new Intent(SettingsActivity.this, ContactUsActivity.class);
             startActivity(intent);
         });
+
 
 
         Button chatAssistantBtn = findViewById(R.id.chatAssistantBtn);
