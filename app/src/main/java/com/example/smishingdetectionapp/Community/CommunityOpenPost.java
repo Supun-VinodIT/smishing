@@ -10,6 +10,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -31,13 +32,15 @@ import java.util.Random;
 
 public class CommunityOpenPost extends AppCompatActivity {
 
-    private TextView titleText, descText, usernameText, timestampText, likesText, commentsText;
+    private TextView titleText, descText, usernameText, timestampText, likesText, commentsText, shareText;
     private EditText commentInput;
     private Button addCommentBtn;
     private ImageButton backButton;
-    private ImageView likeIcon;
+    private ImageView likeIcon, shareIcon;
+
     private RecyclerView commentRecycler;
     private TabLayout tabLayout;
+
     private BottomNavigationView bottomNav;
     private List<CommunityComment> commentList = new ArrayList<>();
     private CommunityDatabaseAccess dbAccess;
@@ -65,6 +68,26 @@ public class CommunityOpenPost extends AppCompatActivity {
         bottomNav = findViewById(R.id.bottom_navigation);
         likeIcon = findViewById(R.id.likeIcon);
         backButton = findViewById(R.id.community_back);
+
+        shareText = findViewById(R.id.shareText);
+        shareIcon = findViewById(R.id.shareIcon);
+
+        View.OnClickListener shareClick = v -> {
+            Intent shareIntent = new Intent(Intent.ACTION_SEND);
+            shareIntent.setType("text/plain");
+            String textToShare = usernameText.getText().toString()
+                    + " wrote:\n\n"
+                    + descText.getText().toString();
+            shareIntent.putExtra(Intent.EXTRA_TEXT, textToShare);
+            startActivity(Intent.createChooser(shareIntent, "Share post via"));
+
+        };
+
+        shareIcon.setOnClickListener(shareClick);
+        shareText.setOnClickListener(shareClick);
+
+
+
 
         Intent intent = getIntent();
         String username = intent.getStringExtra("username");
