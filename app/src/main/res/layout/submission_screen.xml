@@ -32,7 +32,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Exit to Settings"
-        android:backgroundTint="#90CAF9"
+        android:backgroundTint="@color/baby_blue"
         android:textColor="@android:color/black"
         android:layout_marginBottom="16dp" />
 
@@ -41,7 +41,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Submit Another Response"
-        android:backgroundTint="#BBDEFB"
+        android:backgroundTint="@color/baby_blue"
         android:textColor="@android:color/black" />
 
 </LinearLayout>
