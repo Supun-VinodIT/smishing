@@ -13,6 +13,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import com.example.smishingdetectionapp.R;
 import com.example.smishingdetectionapp.ui.Submissionscreen;
+import android.widget.ImageButton;
 
 public class ContactUsActivity extends AppCompatActivity {
 
@@ -47,6 +48,9 @@ public class ContactUsActivity extends AppCompatActivity {
 
         // Submit button logic
         submitButton.setOnClickListener(v -> validateAndSubmit());
+        ImageButton backButton = findViewById(R.id.backButton);
+        backButton.setOnClickListener(v -> finish());
+
 
         // Action bar setup
         if (getSupportActionBar() != null) {
@@ -152,7 +156,7 @@ public class ContactUsActivity extends AppCompatActivity {
             cb3.setChecked(false);
             cb4.setChecked(false);
 
-            // 🔥 Launch the submission screen
+            //  Launch the submission screen
             Intent intent = new Intent(ContactUsActivity.this, Submissionscreen.class);
             startActivity(intent);
         }
