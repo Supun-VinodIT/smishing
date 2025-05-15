@@ -20,6 +20,8 @@ import androidx.biometric.BiometricManager;
 import androidx.biometric.BiometricPrompt;
 import androidx.core.content.ContextCompat;
 
+import com.example.smishingdetectionapp.Community.CommunityHomeActivity;
+import com.example.smishingdetectionapp.Community.CommunityReportActivity;
 import com.example.smishingdetectionapp.chat.ChatAssistantActivity;
 import com.example.smishingdetectionapp.notifications.clipboard.ClipboardHistory;
 import com.example.smishingdetectionapp.notifications.clipboard.ClipboardService;
@@ -36,7 +38,6 @@ import android.view.ViewGroup;
 import androidx.preference.PreferenceManager;
 import android.content.SharedPreferences;
 import android.widget.Switch;
-
 
 public class SettingsActivity extends AppCompatActivity {
     private SeekBar seekBarFontScale;

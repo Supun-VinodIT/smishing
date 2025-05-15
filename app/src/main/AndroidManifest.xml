@@ -135,8 +135,8 @@
         <activity
             android:name=".FeedbackActivity"
             android:exported="false" />
-        <activity android:name=".CommunityHomeActivity" />
-        <activity android:name=".CommunityOpenPost" />
+        <activity android:name="Community.CommunityHomeActivity" />
+        <activity android:name="Community.CommunityOpenPost" />
         <activity
             android:name=".chat.ChatAssistantActivity"
             android:exported="false"
@@ -144,13 +144,13 @@
         <activity
             android:name=".FaqActivity"
             android:exported="false" />
-        <activity android:name=".CommunityNewPost" />
-        <activity
-            android:name=".CommunityPostActivity"
-            android:exported="false" />
+        <activity android:name=".Community.CommunityHomeActivity" />
+        <activity android:name=".Community.CommunityOpenPost" />
+        <activity android:name=".Community.CommunityNewPost" />
+        <activity android:name=".Community.CommunityPostActivity" />
 
         <!-- Community Report page -->
-        <activity android:name=".CommunityReportActivity"
+        <activity android:name=".Community.CommunityReportActivity"
             android:label="Community – Report"/>
         <activity
             android:name=".riskmeter.RiskScannerTCActivity"

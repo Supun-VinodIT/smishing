@@ -476,5 +476,15 @@
     <string name="checking_if_trusted_security_apps_like_norton_or_bitdefender_are_installed">Checking if trusted security apps like Norton or Bitdefender are installed.</string>
     <string name="enable_clipboard_monitor">Enable Clipboard Monitor</string>
     <string name="previous">Previous</string>
+    <!--Community search-->
+    <string-array name="search_fields">
+        <item>All</item>
+        <item>Username</item>
+        <item>Date</item>
+        <item>Title</item>
+        <item>Description</item>
+        <item>Likes</item>
+        <item>Comments</item>
+    </string-array>
 
 </resources>
