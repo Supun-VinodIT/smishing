@@ -51,17 +51,14 @@ public class MainActivity extends SharedActivity {
             } else if (id == R.id.nav_report) {
                 startActivity(new Intent(getApplicationContext(), CommunityReportActivity.class));
                 overridePendingTransition(0, 0);
-                finish();
                 return true;
             } else if (id == R.id.nav_news) {
                 startActivity(new Intent(getApplicationContext(), NewsActivity.class));
                 overridePendingTransition(0, 0);
-                finish();
                 return true;
             } else if (id == R.id.nav_settings) {
                 startActivity(new Intent(getApplicationContext(), SettingsActivity.class));
                 overridePendingTransition(0, 0);
-                finish();
                 return true;
             }
             return false;
@@ -76,6 +73,7 @@ public class MainActivity extends SharedActivity {
             startActivity(new Intent(this, DetectionsActivity.class));
             finish();
         });
+
 
         Button learnMoreButton = findViewById(R.id.fragment_container);
         learnMoreButton.setOnClickListener(v -> {
