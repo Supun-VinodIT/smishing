@@ -1,31 +1,27 @@
 package com.example.smishingdetectionapp;
 
 import android.app.Dialog;
-import android.content.DialogInterface;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
-import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.util.TypedValue;
-import com.example.smishingdetectionapp.PreferencesUtil;
 import android.content.res.Configuration;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.biometric.BiometricManager;
 import androidx.biometric.BiometricPrompt;
 import androidx.core.content.ContextCompat;
 
+import com.example.smishingdetectionapp.Community.CommunityHomeActivity;
+import com.example.smishingdetectionapp.Community.CommunityReportActivity;
 import com.example.smishingdetectionapp.chat.ChatAssistantActivity;
-import com.example.smishingdetectionapp.news.NewsAdapter;
 import com.example.smishingdetectionapp.ui.account.AccountActivity;
 import com.example.smishingdetectionapp.ui.login.LoginActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -34,11 +30,10 @@ import java.util.concurrent.Executor;
 import android.widget.ScrollView;
 import android.graphics.Typeface;
 import android.view.ViewGroup;
-import android.widget.TextView;
+
 import androidx.preference.PreferenceManager;
 import android.content.SharedPreferences;
 import android.widget.Switch;
-
 
 public class SettingsActivity extends AppCompatActivity {
     private SeekBar seekBarFontScale;
@@ -55,6 +50,7 @@ public class SettingsActivity extends AppCompatActivity {
     private ScrollView scrollView;
     private SharedPreferences prefs;
     private boolean isColdStart = true;
+    private Switch darkModeSwitch;
 
 
     @Override
@@ -65,10 +61,33 @@ public class SettingsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
 
+        darkModeSwitch = findViewById(R.id.dark_mode_switch);
+
+        boolean isDarkMode = prefs.getBoolean("dark_mode", false);
+        darkModeSwitch.setChecked(isDarkMode);
+
+        AppCompatDelegate.setDefaultNightMode(
+                isDarkMode ? AppCompatDelegate.MODE_NIGHT_YES : AppCompatDelegate.MODE_NIGHT_NO
+        );
+
+        darkModeSwitch.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            AppCompatDelegate.setDefaultNightMode(
+                    isChecked ? AppCompatDelegate.MODE_NIGHT_YES : AppCompatDelegate.MODE_NIGHT_NO
+            );
+
+            prefs.edit().putBoolean("dark_mode", isChecked).apply();
+
+            // Optional: recreate activity to apply theme changes immediately
+            recreate();
+        });
+
+
         textScaleLabel = findViewById(R.id.textScaleLabel);
         seekBarFontScale = findViewById(R.id.seekBarFontScale);
         textScale = PreferencesUtil.getTextScale(this);
         updateScaleLabel();
+
+
 
 // Set current SeekBar position
         seekBarFontScale.setProgress((int) (textScale * 10));
@@ -138,6 +157,14 @@ public class SettingsActivity extends AppCompatActivity {
                 overridePendingTransition(0, 0);
                 finish();
                 return true;
+
+            } else if (menuItem.getItemId() == R.id.nav_report) {
+                Intent i = new Intent(this, CommunityReportActivity.class);
+                i.putExtra("source", "home");
+                startActivity(i);
+                overridePendingTransition(0,0);
+                return true;
+
             } else if (id == R.id.nav_news) {
                 startActivity(new Intent(getApplicationContext(), NewsActivity.class));
                 overridePendingTransition(0, 0);
@@ -208,7 +235,9 @@ public class SettingsActivity extends AppCompatActivity {
         //Community Button to switch to Community page
         Button communityBtn = findViewById(R.id.communityBtn);
         communityBtn.setOnClickListener(v -> {
-            startActivity(new Intent(this, CommunityHomeActivity.class));
+            Intent i = new Intent(this, CommunityHomeActivity.class);
+            i.putExtra("source", "settings");
+            startActivity(i);
         });
 
         Button signoutBtn = findViewById(R.id.buttonSignOut);
