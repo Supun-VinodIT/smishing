@@ -363,7 +363,7 @@
                 tools:ignore="UseSwitchCompatOrMaterialXml" />
 
 
-            <com.google.android.material.materialswitch.MaterialSwitch
+            <Switch
                 android:id="@+id/always_underline_links"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
