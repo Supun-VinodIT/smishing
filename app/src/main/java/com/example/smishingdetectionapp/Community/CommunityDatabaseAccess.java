@@ -152,34 +152,40 @@ public class CommunityDatabaseAccess {
                 CommunityDatabase.COL_COMMENT_ID + "=?", new String[]{String.valueOf(commentId)});
     }
 
-    public CommunityPost getTopLikedPost() {
-        CommunityPost post = null;
+    // get most liked post(s)
+    public List<CommunityPost> getTopLikedPosts() {
+        List<CommunityPost> posts = new ArrayList<>();
+        SQLiteDatabase db = this.database;
 
-        Cursor cursor = database.query(
-                CommunityDatabase.TABLE_POSTS,
-                null,
-                null,
-                null,
-                null,
-                null,
-                CommunityDatabase.COL_LIKES + " DESC",
-                "1"
+        // Step 1: Get the max likes
+        Cursor maxCursor = db.rawQuery("SELECT MAX(likes) FROM posts", null);
+        int maxLikes = 0;
+        if (maxCursor.moveToFirst()) {
+            maxLikes = maxCursor.getInt(0);
+        }
+        maxCursor.close();
+
+        // Step 2: Get all posts with that like count
+        Cursor cursor = db.rawQuery(
+                "SELECT id, username, date, title AS posttitle, description AS postdescription, likes, comments FROM posts WHERE likes = ?",
+                new String[]{String.valueOf(maxLikes)}
         );
-
         if (cursor.moveToFirst()) {
-            int id = cursor.getInt(cursor.getColumnIndexOrThrow(CommunityDatabase.COL_ID));
-            String username = cursor.getString(cursor.getColumnIndexOrThrow(CommunityDatabase.COL_USERNAME));
-            String date = cursor.getString(cursor.getColumnIndexOrThrow(CommunityDatabase.COL_DATE));
-            String title = cursor.getString(cursor.getColumnIndexOrThrow(CommunityDatabase.COL_TITLE));
-            String description = cursor.getString(cursor.getColumnIndexOrThrow(CommunityDatabase.COL_DESCRIPTION));
-            int likes = cursor.getInt(cursor.getColumnIndexOrThrow(CommunityDatabase.COL_LIKES));
-            int comments = cursor.getInt(cursor.getColumnIndexOrThrow(CommunityDatabase.COL_COMMENTS));
-
-            post = new CommunityPost(id, username, date, title, description, likes, comments);
+            do {
+                CommunityPost post = new CommunityPost(
+                        cursor.getInt(cursor.getColumnIndexOrThrow("id")),
+                        cursor.getString(cursor.getColumnIndexOrThrow("username")),
+                        cursor.getString(cursor.getColumnIndexOrThrow("date")),
+                        cursor.getString(cursor.getColumnIndexOrThrow("posttitle")),
+                        cursor.getString(cursor.getColumnIndexOrThrow("postdescription")),
+                        cursor.getInt(cursor.getColumnIndexOrThrow("likes")),
+                        cursor.getInt(cursor.getColumnIndexOrThrow("comments"))
+                );
+                posts.add(post);
+            } while (cursor.moveToNext());
         }
 
         cursor.close();
-        return post;
+        return posts;
     }
-
 }

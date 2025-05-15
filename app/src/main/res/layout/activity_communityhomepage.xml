@@ -184,9 +184,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:visibility="gone"
-                android:padding="12dp"
-                android:background="@drawable/rounded_lightblue_card"
-                android:elevation="10dp">
+                android:layout_marginTop="8dp">
             </LinearLayout>
         </LinearLayout>
     </ScrollView>

@@ -19,6 +19,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.graphics.Typeface;
 
+import java.util.List;
+
 public class CommunityHomeActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -91,10 +93,10 @@ public class CommunityHomeActivity extends AppCompatActivity {
                 return true;
 
             } else if (id == R.id.nav_report) {
-                Intent i= new Intent(this,CommunityReportActivity.class);
+                Intent i = new Intent(this, CommunityReportActivity.class);
                 i.putExtra("source", "home");
                 startActivity(i);
-                overridePendingTransition(0,0);
+                overridePendingTransition(0, 0);
                 finish();
                 return true;
 
@@ -115,44 +117,68 @@ public class CommunityHomeActivity extends AppCompatActivity {
         loadTrendingPost();
     }
 
+    // Display the top post in card view
     private void loadTrendingPost() {
         CommunityDatabaseAccess dbAccess = new CommunityDatabaseAccess(this);
         dbAccess.open();
-        CommunityPost topPost = dbAccess.getTopLikedPost();
+        List<CommunityPost> topPosts = dbAccess.getTopLikedPosts();
         dbAccess.close();
 
         LinearLayout container = findViewById(R.id.topPostContainer);
+        if (container == null) return;
 
-        if (topPost != null && container != null) {
+        if (topPosts != null && !topPosts.isEmpty()) {
             container.removeAllViews();
             container.setVisibility(View.VISIBLE);
 
-            TextView title = new TextView(this);
-            title.setText(topPost.getPosttitle());
-            title.setTextSize(20);
-            title.setTypeface(null, Typeface.BOLD);
-            title.setTextColor(getResources().getColor(R.color.black));
+            for (CommunityPost post : topPosts) {
+                LinearLayout cardLayout = new LinearLayout(this);
+                cardLayout.setOrientation(LinearLayout.VERTICAL);
+                cardLayout.setPadding(24, 24, 24, 24);
+                cardLayout.setBackgroundResource(R.drawable.rounded_lightblue_card);
+                cardLayout.setElevation(2);
 
-            TextView description = new TextView(this);
-            description.setText(topPost.getPostdescription());
-            description.setTextSize(14);
-            description.setTextColor(getResources().getColor(R.color.black));
+                LinearLayout.LayoutParams cardParams = new LinearLayout.LayoutParams(
+                        LinearLayout.LayoutParams.MATCH_PARENT,
+                        LinearLayout.LayoutParams.WRAP_CONTENT
+                );
+                cardParams.setMargins(0, 0, 0, 12);  // space between cards
+                cardLayout.setLayoutParams(cardParams);
 
-            container.addView(title);
-            container.addView(description);
+                // Post title
+                TextView title = new TextView(this);
+                title.setText(post.getPosttitle());
+                title.setTextSize(18);
+                title.setTypeface(null, Typeface.BOLD);
+                title.setTextColor(getResources().getColor(R.color.black));
+                title.setPadding(0, 0, 0, 8);
 
-            container.setOnClickListener(v -> {
-                Intent intent = new Intent(this, CommunityOpenPost.class);
-                intent.putExtra("postId", topPost.getId());
-                intent.putExtra("username", topPost.getUsername());
-                intent.putExtra("date", topPost.getDate());
-                intent.putExtra("posttitle", topPost.getPosttitle());
-                intent.putExtra("postdescription", topPost.getPostdescription());
-                intent.putExtra("likes", topPost.getLikes());
-                intent.putExtra("comments", topPost.getComments());
-                intent.putExtra("position", 0);
-                startActivity(intent);
-            });
+                // Post description
+                TextView description = new TextView(this);
+                description.setText(post.getPostdescription());
+                description.setTextSize(14);
+                description.setTextColor(getResources().getColor(R.color.black));
+                title.setPadding(0, 0, 0, 8);
+
+                cardLayout.addView(title);
+                cardLayout.addView(description);
+
+                // Link to individual open post
+                cardLayout.setOnClickListener(v -> {
+                    Intent intent = new Intent(this, CommunityOpenPost.class);
+                    intent.putExtra("postId", post.getId());
+                    intent.putExtra("username", post.getUsername());
+                    intent.putExtra("date", post.getDate());
+                    intent.putExtra("posttitle", post.getPosttitle());
+                    intent.putExtra("postdescription", post.getPostdescription());
+                    intent.putExtra("likes", post.getLikes());
+                    intent.putExtra("comments", post.getComments());
+                    intent.putExtra("position", 0);
+                    startActivity(intent);
+                });
+
+                container.addView(cardLayout);
+            }
         }
     }
 }
