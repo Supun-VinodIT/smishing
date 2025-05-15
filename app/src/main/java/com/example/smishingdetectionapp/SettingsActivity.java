@@ -35,6 +35,10 @@ import android.view.ViewGroup;
 import androidx.preference.PreferenceManager;
 import android.content.SharedPreferences;
 import android.widget.Switch;
+import com.example.smishingdetectionapp.ui.ContactUsActivity;
+import com.google.android.material.button.MaterialButton;
+
+
 
 public class SettingsActivity extends AppCompatActivity {
     private SeekBar seekBarFontScale;
@@ -221,6 +225,14 @@ public class SettingsActivity extends AppCompatActivity {
             Intent intent = new Intent(SettingsActivity.this, AboutUsActivity.class);
             startActivity(intent);
         });
+
+        MaterialButton contactUsButton = findViewById(R.id.contactUsBtn);
+        contactUsButton.setOnClickListener(view -> {
+            Intent intent = new Intent(SettingsActivity.this, ContactUsActivity.class);
+            startActivity(intent);
+        });
+
+
 
         Button chatAssistantBtn = findViewById(R.id.chatAssistantBtn);
         chatAssistantBtn.setOnClickListener(v -> {
