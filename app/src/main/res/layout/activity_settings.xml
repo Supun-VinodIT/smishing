@@ -18,6 +18,7 @@
         app:itemTextColor="@color/black"
         app:itemIconSize="25dp"
         app:itemHorizontalTranslationEnabled="false"
+        app:labelVisibilityMode="labeled"
         app:itemPaddingBottom="10dp"
         android:theme="@style/Theme.SmishingDetectionApp"
         app:menu="@menu/activity_main_drawer" />
@@ -202,7 +203,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/news_notification_switch"
                 tools:ignore="UseSwitchCompatOrMaterialXml" />
-          
+
             <Switch
                 android:id="@+id/update_notification_switch"
                 android:layout_width="0dp"
@@ -245,7 +246,7 @@
                 tools:ignore="UseSwitchCompatOrMaterialXml" />
 
 
-            <com.google.android.material.button.MaterialButton
+            <Switch
                 android:id="@+id/open_notification_settings_button"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -296,7 +297,7 @@
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/filtering_text" />
-          
+
             <com.google.android.material.radiobutton.MaterialRadioButton
                 android:id="@+id/OldToNewRB"
                 android:layout_width="wrap_content"
@@ -362,7 +363,7 @@
                 tools:ignore="UseSwitchCompatOrMaterialXml" />
 
 
-            <Switch
+            <com.google.android.material.materialswitch.MaterialSwitch
                 android:id="@+id/always_underline_links"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -726,7 +727,7 @@
                 app:layout_constraintEnd_toEndOf="@+id/passwordBtn"
                 app:layout_constraintTop_toTopOf="@+id/passwordBtn"
                 app:srcCompat="@drawable/outline_arrow_outward_24" />
-          
+
             <ImageView
                 android:id="@+id/imageView11"
                 android:layout_width="wrap_content"
@@ -737,7 +738,7 @@
                 app:layout_constraintEnd_toEndOf="@+id/communityBtn"
                 app:layout_constraintTop_toTopOf="@+id/communityBtn"
                 app:srcCompat="@drawable/outline_arrow_outward_24" />
-          
+
             <ImageView
                 android:id="@+id/imageView12"
                 android:layout_width="wrap_content"
@@ -748,7 +749,7 @@
                 app:layout_constraintEnd_toEndOf="@+id/aboutMeBtn"
                 app:layout_constraintTop_toTopOf="@+id/aboutMeBtn"
                 app:srcCompat="@drawable/outline_arrow_outward_24" />
-          
+
             <ImageView
                 android:id="@+id/imageView13"
                 android:layout_width="wrap_content"

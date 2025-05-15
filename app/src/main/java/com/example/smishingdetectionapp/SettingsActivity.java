@@ -19,10 +19,13 @@ import androidx.biometric.BiometricManager;
 import androidx.biometric.BiometricPrompt;
 import androidx.core.content.ContextCompat;
 
+import com.example.smishingdetectionapp.Community.CommunityHomeActivity;
+import com.example.smishingdetectionapp.Community.CommunityReportActivity;
 import com.example.smishingdetectionapp.chat.ChatAssistantActivity;
 import com.example.smishingdetectionapp.ui.account.AccountActivity;
 import com.example.smishingdetectionapp.ui.login.LoginActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.materialswitch.MaterialSwitch;
 
 import java.util.concurrent.Executor;
 import android.widget.ScrollView;
@@ -34,7 +37,6 @@ import android.content.SharedPreferences;
 import android.widget.Switch;
 import com.example.smishingdetectionapp.ui.ContactUsActivity;
 import com.google.android.material.button.MaterialButton;
-
 
 
 
@@ -160,6 +162,15 @@ public class SettingsActivity extends AppCompatActivity {
                 overridePendingTransition(0, 0);
                 finish();
                 return true;
+
+            } else if (menuItem.getItemId() == R.id.nav_report) {
+                Intent i = new Intent(this, CommunityReportActivity.class);
+                i.putExtra("source", "home");
+                startActivity(i);
+                overridePendingTransition(0,0);
+                finish();
+                return true;
+
             } else if (id == R.id.nav_news) {
                 startActivity(new Intent(getApplicationContext(), NewsActivity.class));
                 overridePendingTransition(0, 0);
@@ -191,7 +202,7 @@ public class SettingsActivity extends AppCompatActivity {
         // Report button to switch to reporting page
         Button reportBtn = findViewById(R.id.reportBtn);
         reportBtn.setOnClickListener(v -> {
-            startActivity(new Intent(this, ReportingActivity.class));
+            startActivity(new Intent(this, CommunityReportActivity.class));
         });
         //Notification button to switch to notification page
 
@@ -238,7 +249,9 @@ public class SettingsActivity extends AppCompatActivity {
         //Community Button to switch to Community page
         Button communityBtn = findViewById(R.id.communityBtn);
         communityBtn.setOnClickListener(v -> {
-            startActivity(new Intent(this, CommunityHomeActivity.class));
+            Intent i = new Intent(this, CommunityHomeActivity.class);
+            i.putExtra("source", "settings");
+            startActivity(i);
         });
 
         Button signoutBtn = findViewById(R.id.buttonSignOut);
