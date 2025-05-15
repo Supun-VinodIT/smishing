@@ -174,9 +174,11 @@ public class CommunityOpenPost extends AppCompatActivity {
                 int position = tab.getPosition();
                 if (position == 0) {
                     startActivity(new Intent(CommunityOpenPost.this, CommunityHomeActivity.class));
+                    overridePendingTransition(0,0);
                     finish();
                 } else if (position == 2) {
                     startActivity(new Intent(CommunityOpenPost.this, CommunityReportActivity.class));
+                    overridePendingTransition(0,0);
                     finish();
                 }
             }
