@@ -20,6 +20,7 @@ import com.example.smishingdetectionapp.MainActivity;
 import com.example.smishingdetectionapp.NewsActivity;
 import com.example.smishingdetectionapp.R;
 import com.example.smishingdetectionapp.SettingsActivity;
+import com.example.smishingdetectionapp.Community.CommunityReportActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.tabs.TabLayout;
 
@@ -175,7 +176,8 @@ public class CommunityOpenPost extends AppCompatActivity {
                     startActivity(new Intent(CommunityOpenPost.this, CommunityHomeActivity.class));
                     finish();
                 } else if (position == 2) {
-                    Toast.makeText(CommunityOpenPost.this, "Report page coming soon :)", Toast.LENGTH_SHORT).show();
+                    startActivity(new Intent(CommunityOpenPost.this, CommunityReportActivity.class));
+                    finish();
                 }
             }
 
@@ -204,6 +206,8 @@ public class CommunityOpenPost extends AppCompatActivity {
 
             if (id == R.id.nav_home) {
                 startActivity(new Intent(this, MainActivity.class));
+            } else if (id == R.id.nav_report) {               // ← NEW
+                startActivity(new Intent(this, CommunityReportActivity.class));
             } else if (id == R.id.nav_news) {
                 startActivity(new Intent(this, NewsActivity.class));
             } else if (id == R.id.nav_settings) {
