@@ -246,7 +246,7 @@
                 tools:ignore="UseSwitchCompatOrMaterialXml" />
 
 
-            <com.google.android.material.button.MaterialButton
+            <Switch
                 android:id="@+id/open_notification_settings_button"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
