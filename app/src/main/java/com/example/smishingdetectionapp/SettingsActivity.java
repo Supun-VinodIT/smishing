@@ -198,7 +198,7 @@ public class SettingsActivity extends AppCompatActivity {
         // Report button to switch to reporting page
         Button reportBtn = findViewById(R.id.reportBtn);
         reportBtn.setOnClickListener(v -> {
-            startActivity(new Intent(this, ReportingActivity.class));
+            startActivity(new Intent(this, CommunityReportActivity.class));
         });
         //Notification button to switch to notification page
 
