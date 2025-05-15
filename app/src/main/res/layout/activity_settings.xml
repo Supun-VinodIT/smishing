@@ -18,6 +18,7 @@
         app:itemTextColor="@color/black"
         app:itemIconSize="25dp"
         app:itemHorizontalTranslationEnabled="false"
+        app:labelVisibilityMode="labeled"
         app:itemPaddingBottom="10dp"
         android:theme="@style/Theme.SmishingDetectionApp"
         app:menu="@menu/activity_main_drawer" />
@@ -348,7 +349,7 @@
 
 
             <Switch
-                android:id="@+id/dark_modeBtn"
+                android:id="@+id/dark_mode_switch"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="28dp"
@@ -373,7 +374,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/dark_modeBtn"
+                app:layout_constraintTop_toBottomOf="@+id/dark_mode_switch"
                 tools:ignore="UseSwitchCompatOrMaterialXml" />
 
             <Switch
