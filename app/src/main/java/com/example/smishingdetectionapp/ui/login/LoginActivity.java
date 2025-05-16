@@ -52,6 +52,7 @@ public class LoginActivity extends AppCompatActivity {
     private ActivityLoginBinding binding;
     private Retrofit retrofit;
     private Retrofitinterface retrofitinterface;
+    //private Object BuildConfig;
     private String BASE_URL = BuildConfig.SERVERIP;
     private boolean isPasswordVisible = false;
 
@@ -63,7 +64,7 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        // BLOCKING screenshots and screen recording********************************
+        // BLOCKING screenshots and screen recording
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE,
                 WindowManager.LayoutParams.FLAG_SECURE);
 
