@@ -8,6 +8,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.widget.RemoteViews;
 
+import com.example.smishingdetectionapp.Community.CommunityReportActivity;
 import com.example.smishingdetectionapp.MainActivity;
 import com.example.smishingdetectionapp.R;
 
@@ -33,7 +34,7 @@ public class SmishingWidgetMedium extends AppWidgetProvider {
             views.setOnClickPendingIntent(R.id.widget_open_app_btn, piOpen);
 
             // Report Smishing Intent
-            Intent reportIntent = new Intent(context, ReportingActivity.class);
+            Intent reportIntent = new Intent(context, CommunityReportActivity.class);
             PendingIntent piReport = PendingIntent.getActivity(context, 1, reportIntent, PendingIntent.FLAG_IMMUTABLE);
             views.setOnClickPendingIntent(R.id.widget_report_btn, piReport);
 
