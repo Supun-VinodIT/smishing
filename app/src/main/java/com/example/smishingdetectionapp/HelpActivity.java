@@ -137,11 +137,10 @@ public class HelpActivity extends SharedActivity {
         }
         MaterialCardView cardFeedback = findViewById(R.id.cardFeedback);
         if (cardFeedback != null) {
-            cardFeedback.setOnClickListener(v -> {
-                startActivity(new Intent(getApplicationContext(), FeedbackActivity.class));
-                overridePendingTransition(0, 0);
-                finish();
-            });
+            cardFeedback.setOnClickListener(v ->
+                    startActivity(new Intent(HelpActivity.this, FeedbackActivity.class))
+            );
+
         }
     }
 }
