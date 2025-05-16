@@ -92,7 +92,7 @@
             <!-- Terms -->
 
 <!--    <TextView->
-<!--        android:id="@+id/termsConditionsText"-->
+<!-        android:id="@+id/termsConditionsText"-->
 <!--        android:layout_width="wrap_content"-->
 <!--        android:layout_height="wrap_content"-->
 <!--        android:layout_marginTop="5dp"-->
