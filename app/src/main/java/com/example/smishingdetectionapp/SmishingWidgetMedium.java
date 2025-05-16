@@ -10,7 +10,6 @@ import android.widget.RemoteViews;
 
 import com.example.smishingdetectionapp.MainActivity;
 import com.example.smishingdetectionapp.R;
-import com.example.smishingdetectionapp.ReportingActivity;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
