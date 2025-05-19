@@ -516,5 +516,14 @@
         <item>Likes</item>
         <item>Comments</item>
     </string-array>
-
+    <string name="other_services">Other Services</string>
+    <string name="go_to_clipboard_history">Go to clipboard history</string>
+    <string name="keeping_you_and_your_loved_ones_safe">keeping you and your loved ones safe</string>
+    <string name="be_a_part_of_the_solution">Be a Part of the Solution</string>
+    <string name="every_report_helps_us_fight_smishing_better">Every report helps us fight smishing better</string>
+    <string name="content_of_message">Content of Message</string>
+    <string name="report_amp_protect"><![CDATA[Report & Protect]]></string>
+    <string name="trending">Trending</string>
+    <string name="posts">Posts</string>
+    <string name="report">Report</string>
 </resources>
